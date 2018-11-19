@@ -17,10 +17,10 @@
      firefox_archive         : "firefox-{{ item }}.tar.bz2"
      firefox_url             : "https://ftp.mozilla.org/pub/firefox/releases/{{ item }}/{{ firefox_arch }}/{{ firefox_lang }}/{{ firefox_archive }}"
    tasks:
-	   - name: Install required tools
-	     apt: name={{item}} state=installed
-	     with_items:
-	       - unzip
+           - name: Install required tools
+             apt: name={{item}} state=installed
+             with_items:
+                     - unzip
 
            - name: Get firefox dependencies from apt
              shell: 'apt install -s firefox | grep Inst | grep -v firefox | cut -d" " -f 2'
