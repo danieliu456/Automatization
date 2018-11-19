@@ -20,7 +20,6 @@
              mysql_db: name=test state=absent
              when: mysql_new_root_pass.changed
 
-           - name: Output new root password
            - debug:
                    msg: "New root password is {{mysql_new_root_pass.stdout}}"
              when: mysql_new_root_pass.changed
