@@ -3,7 +3,7 @@
    become: true
    tasks:
            - name: Update the apt cache
-             apt: update_caches=yes cache_valid_time=3600
+             apt: update_cache=yes cache_valid_time=3600
            - name: Install PHP
              apt: name={{item}} state=installed
              with_items:
@@ -13,5 +13,11 @@
                      - php-xml
            - name: Remove apache2
              apt: name=apache2 state=removed
+
+           - name: Install nginx
+             apt: name=nginx state=installed
+
+           - name: Start nginx
+             service: name=nginx state=running
 
 
