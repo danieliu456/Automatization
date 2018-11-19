@@ -48,8 +48,8 @@
              with_items:
                      - "{{ firefox_version }}"
 
-           - name: Extract firefox archive 
-             command: tar -xvjf {{ firefox_tmp_dir }}/{{ firefox_archive }} {{ firefox_instalL_dir }}/{{ item }}
+           - name: Extract firefox archive
+             unarchive: src="{{ firefox_tmp_dir }}/{{ firefox_archive }}" dest="{{ firefox_instalL_dir }}/{{ item }}" copy=no creates="{{ firefox_instalL_dir }}/{{ item }}/firefox/firefox"
              with_items:
                      - "{{ firefox_version }}"
            
