@@ -3,9 +3,9 @@
    become: true
    tasks:
            - name: Install MySQL
-             apt: name={{item]] state=installed
+             apt: name={{item}} state=installed
              with_items:
-                     - mysql-server-5.6
+                     - mysql-server
                      - python-mysqldb
 
            - name: Generate new root password

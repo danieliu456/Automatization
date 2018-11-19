@@ -5,12 +5,18 @@
            - name: Update the apt cache
              apt: update_cache=yes cache_valid_time=3600
            - name: Install PHP
-             apt: name={{item}} state=installed
+             apt: name={{item}} state=present  state=installed
              with_items:
                      - php5-cli
+<<<<<<< HEAD
                      - php-fpm
                      - php-mysql
                      - php-xml
+=======
+                     - php5-fpm
+                     - php5-sqlite
+                     - php5-json
+>>>>>>> 2bfa3518a0914e168b983ad1c90c810b8d08c4fb
            - name: Remove apache2
              apt: name=apache2 state=removed
 
