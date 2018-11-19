@@ -8,7 +8,7 @@
              apt: update_caches=yes cache_valid_time=3600
            - name: Install PHP
              apt: name={{item}} state=installed
-             with_itmes:
+             with_items:
                      - php
                      - php-fpm
                      - php-mysql
