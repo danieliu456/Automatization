@@ -1,0 +1,2 @@
+OpenNebula VM name not found, use the ID instead
+command show: argument 0 must be one of vmid

@@ -1,6 +1,6 @@
 server {
-	server_name book.example.com;
-	root /var/www/book.example.com;
+	server_name 193.219.91.103:7445;
+	root /var/www/193.219.91.103:7445;
 
 	index index.php;
 

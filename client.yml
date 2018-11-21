@@ -55,5 +55,5 @@
                      - "{{ firefox_version }}"
            
            - name: Link to default version
-             file: src={{ firefox_instalL_dir }}/{{ firefox_default }}/firefox/firefox dest={{ firefox_link_dir }}/firefox force=yes state='link'---
+             file: src={{ firefox_instalL_dir }}/{{ firefox_default }}/firefox/firefox dest={{ firefox_link_dir }}/firefox force=yes state='link'
 
