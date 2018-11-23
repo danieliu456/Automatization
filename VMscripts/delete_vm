@@ -1,0 +1,39 @@
+#!/bin/sh
+
+WEBVMID= cat ~/virtualization/VMscripts/ID.txt | grep dasp4682 | cut -c11-15
+DBVMID= cat ~/virtualization/VMscripts/ID.txt | grep aiiv4637 | cut -c11-15
+CLIENTVMID= cat ~/virtualization/VMscripts/ID.txt | grep ugve4191 | cut -c11-15
+
+WEBUSER=dasp4682
+echo "Please enter password for your VU MIF cloud infrastructure $WEBUSER"
+stty -echo
+read WEBPASS
+stty echo
+CENDPOINT=https://grid5.mif.vu.lt/cloud3/RPC2 
+echo "Will delete VM $WEBVMID"
+$(onevm delete $WEBVMID --user $WEBUSER --password $WEBPASS --endpoint $CENDPOINT )
+echo "$WEBUSER vm deleted..."
+
+DBUSER=aiiv4637
+echo "Please enter password for your VU MIF cloud infrastructure $DBUSER"
+stty -echo
+read DBPASS
+stty echo
+CENDPOINT=https://grid5.mif.vu.lt/cloud3/RPC2
+echo "Will delete VM $DBVMID"
+$(onevm delete $DBVMID --user $DBUSER --password $DBPASS --endpoint $CENDPOINT )
+echo "$DBUSER vm deleted..."
+
+CLIENTUSER=ugve4191
+echo "Please enter password for your VU MIF cloud infrastructure $CLIENTUSER"
+stty -echo
+read CLIENTPASS
+stty echo
+CENDPOINT=https://grid5.mif.vu.lt/cloud3/RPC2
+echo "Will delete VM $CLIENTVMID"
+$(onevm delete $CLIENTVMID --user $CLIENTUSER --password $CLIENTPASS --endpoint $CENDPOINT )
+echo "$CLIENTUSER vm deleted..."
+
+rm ~/virtualization/my_ansible/hosts
+rm ~/virtualization/VMscripts/ID.txt
+exit 0 

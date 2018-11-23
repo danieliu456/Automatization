@@ -1,0 +1,4 @@
+#! /bin/bash 
+sh ~/virtualization/VMscripts/web
+sh ~/virtualization/VMscripts/data
+sh ~/virtualization/VMscripts/client

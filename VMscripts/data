@@ -1,14 +1,15 @@
 #!/bin/sh
-CUSER=dasp4682
-echo "Please enter password for your VU MIF cloud infrastructure $CUSER"
+CUSER=aiiv4637
+echo "Please enter password for your VU MIF cloud infrastructure $CUSER  "
 stty -echo
 read CPASS
 stty echo
 CENDPOINT=https://grid5.mif.vu.lt/cloud3/RPC2
 CVMREZ=$(onetemplate instantiate "debian8-for-virtualization"  --user $CUSER --password $CPASS  --endpoint $CENDPOINT)
-CVMID=$(echo $CVMREZ |cut -d ' ' -f 3)
-echo "$CUSER:/$CVMID \n" >> ~/virtualization/VMscripts/ID.txt
+CVMID=$(echo $CVMREZ |cut -d ' ' -f 3) 
 echo $CVMID
+echo "$CUSER:/$CVMID \n" >> ~/virtualization/VMscripts/ID.txt
+
 echo "Waiting for VM to RUN 60 sec."
 sleep 40
 $(onevm show $CVMID --user $CUSER --password $CPASS  --endpoint $CENDPOINT >$CVMID.txt)
@@ -16,7 +17,7 @@ CSSH_CON=$(cat $CVMID.txt | grep CONNECT\_INFO1| cut -d '=' -f 2 | tr -d '"'|sed
 CSSH_PRIP=$(cat $CVMID.txt | grep PRIVATE\_IP| cut -d '=' -f 2 | tr -d '"')
 echo "Connection string: $CSSH_CON"
 echo "Local IP: $CSSH_PRIP"
-echo "[webservers]\n $CSSH_PRIP" >> ~/virtualization/my_ansible/hosts
+echo "[database]\n $CSSH_PRIP" >> ~/virtualization/my_ansible/hosts
 #echo "Will delete VM $CVMID"
 #$(onevm delete $CVMID --user $CUSER --password $CPASS --endpoint $CENDPOINT )
 exit 0
