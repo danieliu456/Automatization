@@ -1,5 +1,5 @@
 ---
- - hosts: webservers
+ - hosts: client
    become: true
    tasks:
            - name: Update the apt cache
@@ -19,20 +19,10 @@
 
            - name: start nginx
              service: name=nginx state=started
-
-           - name: Copy nginx config file and restart nginx
-             copy:
-                     src: ~/virtualization/templates/nginx/static_site.cfg
-                     dest: /etc/nginx/sites-available/static_site.cfg
-             become: yes
-           - name: create symlink
-             file: 
-                     src: /etc/nginx/sites-available/static_site.cfg
-                     dest: /etc/nginx/sites-enabled/default
-                     state: link
-             become: yes
            - name: copy index.html
-             template: src=~/virtualization/website_html/homePage.html
-                        dest=/usr/share/nginx/html/index.html mode=0644
+             template:
+                     src: ~/virtualization/website_html/homePage.html
+                     dest: /usr/share/nginx/html/index.html mode=0644
+		
            - name: start nginx
              service: name=nginx state=restarted 

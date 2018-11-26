@@ -1,6 +1,13 @@
+upstream php{
+	server unix:/run/php/php7.0-fpm.sock;
+}
+
+
 server {
-	server_name 193.219.91.103:7445;
-	root /var/www/193.219.91.103:7445;
+	server_name _;
+	listen 80 default_server;
+	listen [::]:80 default_server;
+	root ~/virtualization/website_html;
 
 	index index.php;
 
@@ -29,23 +36,11 @@ server {
 
 	rewrite /wp-admin$ $scheme://$host$uri/ permanent;
 
-	location ~*
-^.+\.(ogg|ogv|svg|svgz|eot|otf|woff|mp4|ttf|rss|atom|jpg|jpeg|gif|png|ico|zi
-p|tgz|gz|rar|bz2|doc|xls|exe|ppt|tar|mid|midi|wav|bmp|rtf)$ {
-		access_log off;
-		log_not_found off;
-		expires max;
-	}
-
 	location ~ [^/]\.php(/|$) {
 		fastcgi_split_path_info ^(.+?\.php)(/.*)$;
 		if (!-f $document_root$fastcgi_script_name) {
 			return 404;
 		}
 	include fastcgi_params;
-	fastcgi_index index.php;
-	fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_
-	name;
-	fastcgi_pass php;
 	}
 }
