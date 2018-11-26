@@ -18,7 +18,10 @@
              apt: name=nginx state=installed
 
            - name: Start nginx
-             service: name=nginx state=running
+             service:
+                     name: nginx 
+                     state: running
+             become: yes
   
 	   - name: Start nginx
              service:
