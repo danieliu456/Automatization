@@ -1,6 +1,6 @@
-[webservers]
- 10.0.0.77
 [database]
  10.0.0.78
 [client]
  10.0.0.81
+[webservers]
+ 10.0.1.72
