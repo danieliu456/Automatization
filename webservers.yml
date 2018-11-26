@@ -17,6 +17,8 @@
            - name: Install nginx
              apt: name=nginx state=installed
 
+	   - name: Start nginx
+	     service: name=nginx state=started
            - name: Copy nginx config file and restart nginx
              copy:
                      src: ~/virtualization/templates/nginx/default
@@ -32,8 +34,4 @@
              template: src=~/virtualization/website_html/homePage.html
                         dest=/usr/share/nginx/html/homePage.html mode=0644
            - name: start nginx
-             service: 
-                name: nginx
-                state: started
-             become: yes
-
+             service: name=nginx state=restarted 
