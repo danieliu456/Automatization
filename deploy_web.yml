@@ -22,4 +22,5 @@
                         dest=/usr/share/nginx/html/homePage.html mode=0644
            - name: restart nginx
              service: name=nginx state=restarted
+             become: yes
 
