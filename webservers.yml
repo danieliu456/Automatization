@@ -19,5 +19,27 @@
 
            - name: Start nginx
              service: name=nginx state=running
+  
+	   - name: Start nginx
+             service:
+                name: nginx
+                state: started
+             become: yes
+           - name: Copy nginx config file and restart nginx
+             copy:
+                     src: ~/virtualization/templates/nginx/default
+                     dest: /etc/nginx/sites-available/default
+             become: yes
+           - name: create symlink
+             file:
+                     src: /etc/nginx/sites-available/default
+                     dest: /etc/nginx/sites-enabled/default
+                     state: link
+             become: yes
+           - name: copy index.html
+             template: src=~/virtualization/website_html/homePage.html
+                        dest=/usr/share/nginx/html/homePage.html mode=0644
+           - name: restart nginx
+             service: name=nginx state=restarted
+             become: yes
 
-             
