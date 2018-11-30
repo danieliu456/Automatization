@@ -1,5 +1,5 @@
 ---
- - hosts: client
+ - hosts: webservers
    become: true
    tasks:
            - name: Update the apt cache
@@ -20,9 +20,7 @@
            - name: start nginx
              service: name=nginx state=started
            - name: copy index.html
-             template:
-                     src: ~/virtualization/website_html/homePage.html
-                     dest: /usr/share/nginx/html/index.html mode=0644
-		
+             copy: src=~/virtualization/website_html/
+                        dest=/var/www/html 
            - name: start nginx
              service: name=nginx state=restarted 
