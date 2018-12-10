@@ -5,9 +5,9 @@ stty -echo
 read CPASS
 stty echo
 CENDPOINT=https://grid5.mif.vu.lt/cloud3/RPC2
-CVMREZ=$(onetemplate instantiate "debian8-for-virtualization"  --user $CUSER --password $CPASS  --endpoint $CENDPOINT)
+CVMREZ=$(onetemplate instantiate "debian8-for-virtualization" --name "webserver-vm"  --user $CUSER --password $CPASS  --endpoint $CENDPOINT)
 CVMID=$(echo $CVMREZ |cut -d ' ' -f 3)
-echo "$CUSER:/$CVMID \n" >> ~/virtualization/VMscripts/ID.txt
+echo $CVMID > ~/virtualization/VMscripts/dasp4682.txt
 echo $CVMID
 echo "Waiting for VM to RUN 60 sec."
 sleep 40

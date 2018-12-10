@@ -9,6 +9,7 @@ CVMREZ=$(onetemplate instantiate "debian8-for-virtualization"  --user $CUSER --p
 CVMID=$(echo $CVMREZ |cut -d ' ' -f 3) 
 echo $CVMID
 echo "$CUSER:/$CVMID \n" >> ~/virtualization/VMscripts/ID.txt
+echo $CVMID > ~/virtualization/VMscripts/aiiv4637.txt
 
 echo "Waiting for VM to RUN 60 sec."
 sleep 40

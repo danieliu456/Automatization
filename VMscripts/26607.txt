@@ -1,17 +1,17 @@
-VIRTUAL MACHINE 26164 INFORMATION                                               
-ID                  : 26164               
-NAME                : debian8-for-virtualization-26164
+VIRTUAL MACHINE 26607 INFORMATION                                               
+ID                  : 26607               
+NAME                : webserver-vm        
 USER                : dasp4682            
 GROUP               : users               
 STATE               : ACTIVE              
 LCM_STATE           : RUNNING             
 RESCHED             : No                  
-HOST                : lxibm211            
+HOST                : lxibm209            
 CLUSTER ID          : 100                 
 CLUSTER             : ERROR               
-START TIME          : 11/26 17:06:48      
+START TIME          : 12/10 13:57:32      
 END TIME            : -                   
-DEPLOY ID           : one-26164           
+DEPLOY ID           : one-26607           
 
 VIRTUAL MACHINE MONITORING                                                      
 
@@ -27,21 +27,21 @@ VM DISKS
 
 VM NICS                                                                         
  ID NETWORK              BRIDGE       IP              MAC               PCI_ID  
-  0 VNET2                brvnet2      10.0.1.77       02:00:0a:00:01:4d
+  0 VNET2                brvnet2      10.0.0.167      02:00:0a:00:00:a7
 
 VIRTUAL MACHINE HISTORY                                                         
 SEQ UID  REQ   HOST         ACTION       DS           START        TIME     PROLOG
-  0            lxibm211     none          0  11/26 17:07:02   0d 00h00m   0h00m02s
+  0            lxibm209     none          0  12/10 13:57:42   0d 00h00m   0h00m02s
 
 USER TEMPLATE                                                                   
-CONNECT_INFO1="ssh -p 12705 dasp4682@193.219.91.103"
-CONNECT_INFO2="putty.exe -ssh -P 12705 dasp4682@193.219.91.103"
+CONNECT_INFO1="ssh -p 8968 dasp4682@193.219.91.103"
+CONNECT_INFO2="putty.exe -ssh -P 8968 dasp4682@193.219.91.103"
 DESCRIPTION="Debian 8 for Virtualization course"
 LOGO="images/logos/debian.png"
-PRIVATE_IP="10.0.1.77"
+PRIVATE_IP="10.0.0.167"
 PUBLIC_IP="193.219.91.103"
 SCHED_DS_REQUIREMENTS="TM_MAD=shared"
-TCP_PORT_FORWARDING="12705:22 1207:80"
+TCP_PORT_FORWARDING="8968:22 2489:80"
 
 VIRTUAL MACHINE TEMPLATE                                                        
 AUTOMATIC_REQUIREMENTS="CLUSTER_ID = 100 & !(PUBLIC_CLOUD = YES)"
@@ -54,8 +54,8 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCbmfOzO7KmumUCI2JCH+T43/UnVcLqNsFqbUjQ6x4a
 ",
   ETH0_DNS="10.0.0.1",
   ETH0_GATEWAY="10.0.0.1",
-  ETH0_IP="10.0.1.77",
-  ETH0_MAC="02:00:0a:00:01:4d",
+  ETH0_IP="10.0.0.167",
+  ETH0_MAC="02:00:0a:00:00:a7",
   ETH0_MASK="255.0.0.0",
   ETH0_MTU="8950",
   ETH0_NETWORK="10.0.0.0",
@@ -74,8 +74,8 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCbmfOzO7KmumUCI2JCH+T43/UnVcLqNsFqbUjQ6x4a
 CPU="0.1"
 GRAPHICS=[
   LISTEN="0.0.0.0",
-  PASSWD="ab4cea88666b30e4b29c7731fb7a8fcf6d5c5fd0",
-  PORT="32064",
+  PASSWD="c703a4b308c1544ad2a9702183f8eff2a761005c",
+  PORT="32507",
   RANDOM_PASSWD="YES",
   TYPE="VNC" ]
 MEMORY="512"
@@ -85,4 +85,4 @@ OS=[
   BOOTLOADER="pygrub" ]
 TEMPLATE_ID="363"
 VCPU="1"
-VMID="26164"
+VMID="26607"
