@@ -43,5 +43,11 @@
                dest: /var/www/html
                remote_src: yes
 
+           - name: copy password
+             copy: src=~/virtualization/password.txt dest=/var/www/html
+
+           - name: copy ip
+             copy: src=~/virtualization/ip.txt dest=/var/www/html
+
            - name: restart nginx
              service: name=nginx state=restarted 

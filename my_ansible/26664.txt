@@ -1,0 +1,92 @@
+VIRTUAL MACHINE 26664 INFORMATION                                               
+ID                  : 26664               
+NAME                : webserver-vm        
+USER                : dasp4682            
+GROUP               : users               
+STATE               : ACTIVE              
+LCM_STATE           : RUNNING             
+RESCHED             : No                  
+HOST                : lxibm211            
+CLUSTER ID          : 100                 
+CLUSTER             : ERROR               
+START TIME          : 12/11 13:44:22      
+END TIME            : -                   
+DEPLOY ID           : one-26664           
+
+VIRTUAL MACHINE MONITORING                                                      
+CPU                 : 50.5                
+MEMORY              : 512M                
+NETTX               : 1K                  
+NETRX               : 4K                  
+
+PERMISSIONS                                                                     
+OWNER               : um-                 
+GROUP               : ---                 
+OTHER               : ---                 
+
+VM DISKS                                                                        
+ ID DATASTORE  TARGET IMAGE                               SIZE      TYPE SAVE
+  0 qcow2      vda    debian8                             12M/10G   file   NO
+  1 -          hda    CONTEXT                             1M/-      -       -
+
+VM NICS                                                                         
+ ID NETWORK              BRIDGE       IP              MAC               PCI_ID  
+  0 VNET2                brvnet2      10.0.0.218      02:00:0a:00:00:da
+
+VIRTUAL MACHINE HISTORY                                                         
+SEQ UID  REQ   HOST         ACTION       DS           START        TIME     PROLOG
+  0            lxibm211     none          0  12/11 13:44:38   0d 00h00m   0h00m02s
+
+USER TEMPLATE                                                                   
+CONNECT_INFO1="ssh -p 13878 dasp4682@193.219.91.103"
+CONNECT_INFO2="putty.exe -ssh -P 13878 dasp4682@193.219.91.103"
+DESCRIPTION="Debian 8 for Virtualization course"
+LOGO="images/logos/debian.png"
+PRIVATE_IP="10.0.0.218"
+PUBLIC_IP="193.219.91.103"
+SCHED_DS_REQUIREMENTS="TM_MAD=shared"
+TCP_PORT_FORWARDING="13878:22 1159:80"
+
+VIRTUAL MACHINE TEMPLATE                                                        
+AUTOMATIC_REQUIREMENTS="CLUSTER_ID = 100 & !(PUBLIC_CLOUD = YES)"
+CONTEXT=[
+  DISK_ID="1",
+  EC2_KEYNAME="dasp4682",
+  EC2_PUBLIC_KEY="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDLRPsNMpspSsCiQRM4vxQpvrJbStUPPsHgaHZV3Wc0DVjkf+IuhZUxQPtSYv5KYnXwVTp8qeCOWVYzYuCgrDky0sn7CHbmXGHsp+PdTz9NvyzAMdY3ftAT1yY6U/uDu95zhLFrx7tl0WyhlRyCbur3srXwae4bxbhYHS5My55rp6Nm3QKlnjQrVdyIwcJ2EGN/dFf1qIS8NtrGLciwU2pIBz6ItyyfLXnhRyb+muCvEXZjAqRj7pBtox2hj0i0qp5D/6cFAHgBLcdTOIsMyrQGH1zt75JjvSAJSo9Kn0uKZ6DB4ow12MUSjc6/UygqVvdofJXfqGIpgXVbnVBBsDZr dasp4682@linux1
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCbmfOzO7KmumUCI2JCH+T43/UnVcLqNsFqbUjQ6x4aX/V9R15XX1PyhRKRU1mUd+iqY12ekY/fj+IuGSeHfxKF1EegYuJZf9tUZbCp4/MhZhBiFZCql4KeRVJwKQl8ZwUp41dT/5KDvEShcAZ4KCDHJ4xc1z6NkGBhNmLgvhG4HDoIyTAne0D3ajJPDseogQgu7J8if2qlJHF6wEqOnFfnfZUEXow16ofiGgrZhkLN/9KnpBFV2i4r8VW5mALhMjml/2D8SLAAGzz5fDL5Yvg/whzNwA53fYup39PKNq5EdGq3CBfwfzRRjoGUipUYm3h98IKoxBhA4T9qERtwO2Nt root@debian
+",
+  ETH0_DNS="10.0.0.1",
+  ETH0_GATEWAY="10.0.0.1",
+  ETH0_IP="10.0.0.218",
+  ETH0_MAC="02:00:0a:00:00:da",
+  ETH0_MASK="255.0.0.0",
+  ETH0_MTU="8950",
+  ETH0_NETWORK="10.0.0.0",
+  NETWORK="YES",
+  SSH_PUBLIC_KEY="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDLRPsNMpspSsCiQRM4vxQpvrJbStUPPsHgaHZV3Wc0DVjkf+IuhZUxQPtSYv5KYnXwVTp8qeCOWVYzYuCgrDky0sn7CHbmXGHsp+PdTz9NvyzAMdY3ftAT1yY6U/uDu95zhLFrx7tl0WyhlRyCbur3srXwae4bxbhYHS5My55rp6Nm3QKlnjQrVdyIwcJ2EGN/dFf1qIS8NtrGLciwU2pIBz6ItyyfLXnhRyb+muCvEXZjAqRj7pBtox2hj0i0qp5D/6cFAHgBLcdTOIsMyrQGH1zt75JjvSAJSo9Kn0uKZ6DB4ow12MUSjc6/UygqVvdofJXfqGIpgXVbnVBBsDZr dasp4682@linux1
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCbmfOzO7KmumUCI2JCH+T43/UnVcLqNsFqbUjQ6x4aX/V9R15XX1PyhRKRU1mUd+iqY12ekY/fj+IuGSeHfxKF1EegYuJZf9tUZbCp4/MhZhBiFZCql4KeRVJwKQl8ZwUp41dT/5KDvEShcAZ4KCDHJ4xc1z6NkGBhNmLgvhG4HDoIyTAne0D3ajJPDseogQgu7J8if2qlJHF6wEqOnFfnfZUEXow16ofiGgrZhkLN/9KnpBFV2i4r8VW5mALhMjml/2D8SLAAGzz5fDL5Yvg/whzNwA53fYup39PKNq5EdGq3CBfwfzRRjoGUipUYm3h98IKoxBhA4T9qERtwO2Nt root@debian
+",
+  SWAP_SIZE="512",
+  TARGET="hda",
+  USER_NAME="dasp4682",
+  USER_PUBKEY="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDLRPsNMpspSsCiQRM4vxQpvrJbStUPPsHgaHZV3Wc0DVjkf+IuhZUxQPtSYv5KYnXwVTp8qeCOWVYzYuCgrDky0sn7CHbmXGHsp+PdTz9NvyzAMdY3ftAT1yY6U/uDu95zhLFrx7tl0WyhlRyCbur3srXwae4bxbhYHS5My55rp6Nm3QKlnjQrVdyIwcJ2EGN/dFf1qIS8NtrGLciwU2pIBz6ItyyfLXnhRyb+muCvEXZjAqRj7pBtox2hj0i0qp5D/6cFAHgBLcdTOIsMyrQGH1zt75JjvSAJSo9Kn0uKZ6DB4ow12MUSjc6/UygqVvdofJXfqGIpgXVbnVBBsDZr dasp4682@linux1
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCbmfOzO7KmumUCI2JCH+T43/UnVcLqNsFqbUjQ6x4aX/V9R15XX1PyhRKRU1mUd+iqY12ekY/fj+IuGSeHfxKF1EegYuJZf9tUZbCp4/MhZhBiFZCql4KeRVJwKQl8ZwUp41dT/5KDvEShcAZ4KCDHJ4xc1z6NkGBhNmLgvhG4HDoIyTAne0D3ajJPDseogQgu7J8if2qlJHF6wEqOnFfnfZUEXow16ofiGgrZhkLN/9KnpBFV2i4r8VW5mALhMjml/2D8SLAAGzz5fDL5Yvg/whzNwA53fYup39PKNq5EdGq3CBfwfzRRjoGUipUYm3h98IKoxBhA4T9qERtwO2Nt root@debian
+" ]
+CPU="0.1"
+GRAPHICS=[
+  LISTEN="0.0.0.0",
+  PASSWD="dc70a6ca94371a6db115c1899823b947353d17e7",
+  PORT="32564",
+  RANDOM_PASSWD="YES",
+  TYPE="VNC" ]
+MEMORY="512"
+OS=[
+  ARCH="x86_64",
+  BOOT="hd",
+  BOOTLOADER="pygrub" ]
+TEMPLATE_ID="363"
+VCPU="1"
+VMID="26664"
