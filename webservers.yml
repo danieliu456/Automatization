@@ -11,6 +11,7 @@
                      - php5-fpm
                      - php5-mysql
                      - php5-json
+                     - php5-curl
 
            - name: Install Git
              apt: name=git state=installed
@@ -26,6 +27,21 @@
 
            - name: start nginx
              service: name=nginx state=started
+
+           - name: copy server.conf file
+             copy: src=~/virtualization/templates/nginx/default dest=/etc/nginx/sites-available/default
+
+           - name: enable configuration
+             file: >
+                dest=/etc/nginx/sites-enabled/default
+                src=/etc/nginx/sites-available/default
+                state=link
+
+           - name: copy file to fpm/pool.d
+             copy: src=~/virtualization/templates/nginx/www.conf dest=/etc/php5/fpm/pool.d/www.conf
+
+           - name: restart fpm
+             service: name=php5-fpm service=restarted
 
            - name: delete var/www/html content
              file:
@@ -43,11 +59,13 @@
                dest: /var/www/html
                remote_src: yes
 
-           - name: copy password
+           - name: Copy password
              copy: src=~/virtualization/password.txt dest=/var/www/html
 
-           - name: copy ip
+           - name: Copy private ip
              copy: src=~/virtualization/ip.txt dest=/var/www/html
 
            - name: restart nginx
-             service: name=nginx state=restarted 
+             service: name=nginx state=restarted
+           - name: retart fpm
+             command: service php5-fpm restart

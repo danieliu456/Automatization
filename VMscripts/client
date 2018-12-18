@@ -5,7 +5,7 @@ stty -echo
 read CPASS
 stty echo
 CENDPOINT=https://grid5.mif.vu.lt/cloud3/RPC2
-CVMREZ=$(onetemplate instantiate "debian8-for-virtualization"  --user $CUSER --password $CPASS  --endpoint $CENDPOINT --name client-vm)
+CVMREZ=$(onetemplate instantiate "debian8"  --user $CUSER --password $CPASS  --endpoint $CENDPOINT --name client-vm)
 CVMID=$(echo $CVMREZ |cut -d ' ' -f 3) 
 echo "$CUSER:/$CVMID \n" >> ~/virtualization/VMscripts/ID.txt
 echo $CVMID > ~/virtualization/VMscripts/ugve4191.txt

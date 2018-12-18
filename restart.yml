@@ -1,0 +1,5 @@
+---
+ - hosts: webservers
+   tasks: 
+   - name: restart
+     service: name=php5-fpm state=restarted 

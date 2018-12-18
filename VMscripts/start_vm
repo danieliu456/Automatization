@@ -1,4 +1,5 @@
 #! /bin/bash
+echo "UPDATE"
 apt "update"
 echo "Opennebula"
 echo "deb https://downloads.opennebula.org/repo/5.4/Debian/8 stable opennebula" > /etc/apt/sources.list.d/opennebula.list
