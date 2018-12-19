@@ -1,24 +1,51 @@
 #!/bin/sh
-CUSER=ugve4191
-echo "Please enter password for your VU MIF cloud infrastructure $CUSER"
+CUSERU=ugve4191
+CUSERD=dasp4682
+CUSERA=aiiv4637
+echo "Please enter password for your VU MIF cloud infrastructure $CUSERU"
 stty -echo
-read CPASS
+read CPASSU
+stty echo
+echo "Please enter password for your VU MIF cloud infrastructure $CUSERD"
+stty -echo
+read CPASSD
+stty echo
+echo "Please enter password for your VU MIF cloud infrastructure $CUSERA"
+stty -echo
+read CPASSA
 stty echo
 CENDPOINT=https://grid5.mif.vu.lt/cloud3/RPC2
-CVMREZ=$(onetemplate instantiate "debian9-lxde"  --user $CUSER --password $CPASS  --endpoint $CENDPOINT --name client-vm)
-CVMID=$(echo $CVMREZ |cut -d ' ' -f 3) 
-echo "$CUSER:/$CVMID \n" >> ~/virtualization/VMscripts/ID.txt
-echo $CVMID > ~/virtualization/VMscripts/ugve4191.txt
+CVMREZU=$(onetemplate instantiate "debian9-lxde"  --user $CUSERU --password $CPASSU  --endpoint $CENDPOINT --name client-vm)
+CVMIDU=$(echo $CVMREZU |cut -d ' ' -f 3) 
 
-echo $CVMID
+CVMREZD=$(onetemplate instantiate "debian8-for-virtualization"  --user $CUSERD --password $CPASSD  --endpoint $CENDPOINT --name webserver-vm)
+CVMIDD=$(echo $CVMREZD |cut -d ' ' -f 3) 
+
+CVMREZA=$(onetemplate instantiate "debian8"  --user $CUSERA --password $CPASSA  --endpoint $CENDPOINT --name db-vm)
+CVMIDA=$(echo $CVMREZA |cut -d ' ' -f 3) 
+#echo "$CUSER:/$CVMID \n" >> ~/virtualization/VMscripts/ID.txt
+#echo $CVMID > ~/virtualization/VMscripts/ugve4191.txt
+
+#echo $CVMID
 echo "Waiting for VM to RUN 60 sec."
 sleep 40
-$(onevm show $CVMID --user $CUSER --password $CPASS  --endpoint $CENDPOINT >$CVMID.txt)
-CSSH_CON=$(cat $CVMID.txt | grep CONNECT\_INFO1| cut -d '=' -f 2 | tr -d '"'|sed 's/'$CUSER'/root/')
-CSSH_PRIP=$(cat $CVMID.txt | grep PRIVATE\_IP| cut -d '=' -f 2 | tr -d '"')
+$(onevm show $CVMIDU --user $CUSERU --password $CPASSU  --endpoint $CENDPOINT >$CVMIDU.txt)
+CSSH_CONU=$(cat $CVMIDU.txt | grep CONNECT\_INFO1| cut -d '=' -f 2 | tr -d '"'|sed 's/'$CUSERU'/root/')
+CSSH_PRIPU=$(cat $CVMIDU.txt | grep PRIVATE\_IP| cut -d '=' -f 2 | tr -d '"')
+
+$(onevm show $CVMIDD --user $CUSERD --password $CPASSD  --endpoint $CENDPOINT >$CVMIDD.txt)
+CSSH_COND=$(cat $CVMIDD.txt | grep CONNECT\_INFO1| cut -d '=' -f 2 | tr -d '"'|sed 's/'$CUSERD'/root/')
+CSSH_PRIPD=$(cat $CVMIDD.txt | grep PRIVATE\_IP| cut -d '=' -f 2 | tr -d '"')
+
+$(onevm show $CVMIDA --user $CUSERA --password $CPASSA  --endpoint $CENDPOINT >$CVMIDA.txt)
+CSSH_CONA=$(cat $CVMIDA.txt | grep CONNECT\_INFO1| cut -d '=' -f 2 | tr -d '"'|sed 's/'$CUSERA'/root/')
+CSSH_PRIPA=$(cat $CVMIDA.txt | grep PRIVATE\_IP| cut -d '=' -f 2 | tr -d '"')
 echo "Connection string: $CSSH_CON"
 echo "Local IP: $CSSH_PRIP"
-echo "[client]\n $CSSH_PRIP" >> ~/virtualization/my_ansible/hosts
+echo "[client]\n $CSSH_PRIPU" >> ~/virtualization/my_ansible/hosts
+echo "[webservers]\n $CSSH_PRIPD" >> ~/virtualization/my_ansible/hosts
+echo "[database]\n $CSSH_PRIPA" >> ~/virtualization/my_ansible/hosts
+echo "$CSSH_PRIPA" > ~/virtualization/ip.txt
 #echo "Will delete VM $CVMID"
 #$(onevm delete $CVMID --user $CUSER --password $CPASS --endpoint $CENDPOINT )
 sh ~/virtualization/VMscripts/start_ansible
