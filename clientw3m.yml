@@ -4,17 +4,7 @@
    tasks:
             - name: update the apt cache
               apt: update_cache=yes cache_valid_time=3600
-            - name: Install w3m
-              apt: name={{item}} state=installed
-              with_items:
-                      - w3m
-            - name: Create a login user
-              user:
-                 name: client
-                 password: '$6$tNtKoZKQhA$TTG9u3fQ1J8nyypGEizRmKCV3p2d/zmKtYTQ6veY/AJkRtWZQr7GJ/3QjnhFK6IRE.n8r7tM6ZpdVynW8t8v0.'
-                 groups: sudo
-                 state: present
-                 shell: /bin/bash
-                 system: no
-                 createhome: yes
-                 home: /home/client
+            - name: Startx
+              command: startx
+              async: 45
+              poll: 0

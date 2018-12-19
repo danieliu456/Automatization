@@ -39,7 +39,7 @@
 
            - name: Create root my.cnf
              template: src=~/virtualization/templates/mysql/my_root.cnf dest=/root/.my.cnf
-#             when: mysql_new_root_pass.changed
+             when: mysql_new_root_pass.changed
 
            - name: Copy my.cnf with bind_address
              copy: src=~/virtualization/templates/mysql/my.cnf dest=/etc/mysql/my.cnf
