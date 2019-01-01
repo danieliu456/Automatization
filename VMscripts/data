@@ -5,10 +5,11 @@ stty -echo
 read CPASS
 stty echo
 CENDPOINT=https://grid5.mif.vu.lt/cloud3/RPC2
-CVMREZ=$(onetemplate instantiate "debian8-for-virtualization"  --user $CUSER --password $CPASS  --endpoint $CENDPOINT)
+CVMREZ=$(onetemplate instantiate "debian8"  --user $CUSER --password $CPASS  --endpoint $CENDPOINT)
 CVMID=$(echo $CVMREZ |cut -d ' ' -f 3) 
 echo $CVMID
 echo "$CUSER:/$CVMID \n" >> ~/virtualization/VMscripts/ID.txt
+echo $CVMID > ~/virtualization/VMscripts/aiiv4637.txt
 
 echo "Waiting for VM to RUN 60 sec."
 sleep 40
@@ -17,6 +18,7 @@ CSSH_CON=$(cat $CVMID.txt | grep CONNECT\_INFO1| cut -d '=' -f 2 | tr -d '"'|sed
 CSSH_PRIP=$(cat $CVMID.txt | grep PRIVATE\_IP| cut -d '=' -f 2 | tr -d '"')
 echo "Connection string: $CSSH_CON"
 echo "Local IP: $CSSH_PRIP"
+echo "$CSSH_PRIP" > ~/virtualization/ip.txt
 echo "[database]\n $CSSH_PRIP" >> ~/virtualization/my_ansible/hosts
 #echo "Will delete VM $CVMID"
 #$(onevm delete $CVMID --user $CUSER --password $CPASS --endpoint $CENDPOINT )

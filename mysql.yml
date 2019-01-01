@@ -7,10 +7,14 @@
              with_items:
                      - mysql-server
                      - python-mysqldb
+                     - bzip2
 
            - name: Generate new root password
              command: openssl rand -hex 7 creates=/root/.my.cnf
              register: mysql_new_root_pass
+
+           - name: Print password to file
+             local_action: copy content="pass" dest=~/virtualization/password.txt
 
            - name: Remove anonymous users
              mysql_user: name="" state=absent
@@ -33,7 +37,26 @@
                      - localhost
              when: mysql_new_root_pass.changed
 
-           - name: Create my.cnf
-             template: src=templates/mysql/my.cnf dest=/root/.my.cnf
+           - name: Create root my.cnf
+             template: src=~/virtualization/templates/mysql/my_root.cnf dest=/root/.my.cnf
              when: mysql_new_root_pass.changed
 
+           - name: Copy my.cnf with bind_address
+             copy: src=~/virtualization/templates/mysql/my.cnf dest=/etc/mysql/my.cnf
+
+           - name: Create CallCenter database
+             mysql_db: name=calls state=present
+
+           - name: Copy database dump file
+             copy:
+               src: ~/virtualization/table.sql.bz2
+               dest: /tmp
+
+           - name: Restore database
+             mysql_db:
+               name: my_db
+               state: import
+               target: /tmp/table.sql.bz2
+
+           - name: Restart server
+             service: name=mysql state=restarted

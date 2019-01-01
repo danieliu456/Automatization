@@ -9,8 +9,16 @@
              with_items:
                      - php5-cli
                      - php5-fpm
-                     - php5-sqlite
+                     - php5-mysql
                      - php5-json
+                     - php5-curl
+
+           - name: Install Git
+             apt: name=git state=installed
+
+           - name: Install unzip
+             apt: name=unzip state=installed
+
            - name: Remove apache2
              apt: name=apache2 state=removed
 
@@ -20,19 +28,44 @@
            - name: start nginx
              service: name=nginx state=started
 
-           - name: Copy nginx config file and restart nginx
-             copy:
-                     src: ~/virtualization/templates/nginx/static_site.cfg
-                     dest: /etc/nginx/sites-available/static_site.cfg
-             become: yes
-           - name: create symlink
-             file: 
-                     src: /etc/nginx/sites-available/static_site.cfg
-                     dest: /etc/nginx/sites-enabled/default
-                     state: link
-             become: yes
-           - name: copy index.html
-             template: src=~/virtualization/website_html/homePage.html
-                        dest=/usr/share/nginx/html/index.html mode=0644
-           - name: start nginx
-             service: name=nginx state=restarted 
+           - name: copy server.conf file
+             copy: src=~/virtualization/templates/nginx/default dest=/etc/nginx/sites-available/default
+
+           - name: enable configuration
+             file: >
+                dest=/etc/nginx/sites-enabled/default
+                src=/etc/nginx/sites-available/default
+                state=link
+
+           - name: copy file to fpm/pool.d
+             copy: src=~/virtualization/templates/nginx/www.conf dest=/etc/php5/fpm/pool.d/www.conf
+
+           - name: restart fpm
+             service: name=php5-fpm service=restarted
+
+           - name: delete var/www/html content
+             file:
+               state: absent
+               path: /var/www/html/
+
+           - name: pull webiste from Git
+             git: repo=https://git.mif.vu.lt/auga4550/Website.git
+                        dest=/var/www/html
+                  accept_hostkey=true 
+
+           - name: unzip htmlZipped.zip
+             unarchive:
+               src: /var/www/html/htmlZipped.zip
+               dest: /var/www/html
+               remote_src: yes
+
+           - name: Copy password
+             copy: src=~/virtualization/password.txt dest=/var/www/html
+
+           - name: Copy private ip
+             copy: src=~/virtualization/ip.txt dest=/var/www/html
+
+           - name: restart nginx
+             service: name=nginx state=restarted
+           - name: retart fpm
+             command: service php5-fpm restart
